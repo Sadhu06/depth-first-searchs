@@ -1,6 +1,6 @@
 <h1>ExpNo 2 : Implement Depth First Search Traversal of a Graph</h1> 
-<h3>Name: </h3>
-<h3>Register Number:     </h3>
+<h3>Name: Sadhana S </h3>
+<h3>Register Number: 212224230234   </h3>
 <H3>Aim:</H3>
 <p> To Implement Depth First Search Traversal of a Graph using Python 3.</p>
 <h3>Theory:</h3>
@@ -54,6 +54,53 @@ Now, the Stack becomes empty, which means we have visited all the nodes, and our
  <li>If Not Visited, add it to the STACK. Else Call The Function Again Until No more nodes needs to be visited.</li>
 </ol></B>
 
+PROGRAM
+```
+from collections import defaultdict
+
+def dfs(graph, start):
+    visited = defaultdict(bool)
+    path = []
+    stack = [start]  
+
+    while stack:
+        node = stack.pop()  
+        if not visited[node]:
+            visited[node] = True
+            path.append(node)
+
+            for neighbour in reversed(graph[node]):
+                if not visited[neighbour]:
+                    stack.append(neighbour)
+    return path
+
+n, m = map(int, input().split())  
+graph = defaultdict(list)
+vertices = set()
+
+count = 0
+while count < m:
+    line = input().strip()
+    if not line:   
+        continue
+    u, v = line.split()
+    graph[u].append(v)
+    graph[v].append(u)
+    vertices.add(u)
+    vertices.add(v)
+    count += 1
+
+if "0" in vertices:
+    start = "0"
+elif "A" in vertices:
+    start = "A"
+else:
+    start = sorted(vertices)[0]  
+
+traversal = dfs(graph, start)
+print(traversal)
+```
+
 <hr>
 <h3>Sample Input</h3>
 <hr>
@@ -73,6 +120,14 @@ F H <BR>
 ['A', 'B', 'E', 'D', 'C', 'G', 'F', 'H']
 
 <hr>
+Input 
+
+<img width="82" height="524" alt="Screenshot 2025-08-29 112621" src="https://github.com/user-attachments/assets/20640d1f-ed34-42c1-bd77-8a8ebbc6809e" />
+
+Output
+
+<img width="447" height="130" alt="Screenshot 2025-08-29 112652" src="https://github.com/user-attachments/assets/00dc25aa-2528-41ae-a3e3-019943943aea" />
+
 
 <hr>
 <h3>Sample Input</h3>
@@ -87,6 +142,15 @@ F H <BR>
 <h3>Sample Output</h3>
 <hr>
 ['0', '1', '2', '3', '4']
+
+Input
+
+<img width="70" height="298" alt="Screenshot 2025-08-29 112741" src="https://github.com/user-attachments/assets/e2e1e910-7b92-4356-874f-3c8a85cf2e18" />
+
+Output
+
+<img width="383" height="104" alt="Screenshot 2025-08-29 112817" src="https://github.com/user-attachments/assets/b6b5e525-753f-4eee-ba87-139552fe6cae" />
+
 
 <hr>
 <h3>Result:</h3>
